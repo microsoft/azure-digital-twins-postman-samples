@@ -13,6 +13,15 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n  {\r\n    \"@id\": \"dtmi:com:example:Sample;1\",\r\n    \"@type\": \"Interface\",\r\n    \"displayName\": \"Sample Interface\",\r\n    \"contents\": [\r\n      {\r\n        \"@type\": \"Property\",\r\n        \"name\": \"name\",\r\n        \"displayName\": \"Sample instance name\",\r\n        \"schema\": \"string\"\r\n      },\r\n      {\r\n        \"@type\": \"Property\",\r\n        \"name\": \"temp\",\r\n        \"displayName\": \"Sample instance temperature\",\r\n        \"schema\": \"integer\"\r\n      },\r\n      {\r\n        \"@type\": \"Property\",\r\n        \"name\": \"comfortIndex\",\r\n        \"displayName\": \"Sample instance comfort index\",\r\n        \"schema\": \"integer\"\r\n      }\r\n    ],\r\n    \"@context\": \"dtmi:dtdl:context;2\"\r\n  }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "https://{{digitaltwins-hostname}}/models?api-version=2020-10-31",
 							"protocol": "https",
@@ -63,14 +72,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{digitaltwins-hostname}}/models/{id}?api-version=2020-10-31",
+							"raw": "https://{{digitaltwins-hostname}}/models/{{model-id}}?api-version=2020-10-31",
 							"protocol": "https",
 							"host": [
 								"{{digitaltwins-hostname}}"
 							],
 							"path": [
 								"models",
-								"{id}"
+								"{{model-id}}"
 							],
 							"query": [
 								{
@@ -83,24 +92,24 @@
 					"response": []
 				},
 				{
-					"name": "DigitalTwinModels GetById with Optional Params",
+					"name": "DigitalTwinModels GetById includeModelDefinition",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{digitaltwins-hostname}}/models/{id}?includeModelDefinition={includeModelDefinition}&api-version=2020-10-31",
+							"raw": "https://{{digitaltwins-hostname}}/models/{{model-id}}?includeModelDefinition=true&api-version=2020-10-31",
 							"protocol": "https",
 							"host": [
 								"{{digitaltwins-hostname}}"
 							],
 							"path": [
 								"models",
-								"{id}"
+								"{{model-id}}"
 							],
 							"query": [
 								{
 									"key": "includeModelDefinition",
-									"value": "{includeModelDefinition}"
+									"value": "true"
 								},
 								{
 									"key": "api-version",
@@ -565,10 +574,44 @@
 			]
 		}
 	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
 	"variable": [
 		{
 			"key": "digitaltwins-hostname",
 			"value": ""
+		},
+		{
+			"key": "model-id",
+			"value": "dtmi:com:example:Sample;1"
 		}
 	]
 }
