@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "[\r\n  {\r\n    \"@id\": \"dtmi:com:example:sensor;1\",\r\n    \"@type\": \"Interface\",\r\n    \"displayName\": \"sensor interface\",\r\n    \"contents\": [\r\n      {\r\n        \"@type\": \"Property\",\r\n        \"name\": \"name\",\r\n        \"displayName\": \"sensor name\",\r\n        \"schema\": \"string\"\r\n      },\r\n      {\r\n        \"@type\": \"Property\",\r\n        \"name\": \"temp\",\r\n        \"displayName\": \"room temperature\",\r\n        \"schema\": \"integer\"\r\n      }      \r\n    ],\r\n    \"@context\": \"dtmi:dtdl:context;2\"\r\n  },\r\n  {\r\n    \"@id\": \"dtmi:com:example:room;1\",\r\n    \"@type\": \"Interface\",\r\n    \"displayName\": \"room interface\",\r\n    \"contents\": [\r\n      {\r\n        \"@type\": \"Property\",\r\n        \"name\": \"name\",\r\n        \"displayName\": \"room name\",\r\n        \"schema\": \"string\"\r\n      },\r\n      {\r\n        \"@type\": \"Property\",\r\n        \"name\": \"temp\",\r\n        \"displayName\": \"room temperature\",\r\n        \"schema\": \"integer\"\r\n      },\r\n      {\r\n        \"@type\": \"Property\",\r\n        \"name\": \"comfortIndex\",\r\n        \"displayName\": \"room comfort index\",\r\n        \"schema\": \"integer\"\r\n      },\r\n      {\r\n      \"@type\": \"Relationship\",\r\n      \"@id\": \"dtmi:com:example:room:rel_has_sensors;1\",\r\n      \"name\": \"rel_has_envsensors\",\r\n      \"displayName\": \"room has sensors\",\r\n      \"target\": \"dtmi:com:example:sensor;1\"\r\n    }\r\n    ],\r\n    \"@context\": \"dtmi:dtdl:context;2\"\r\n  }\r\n]",
+							"raw": "[\r\n  {\r\n    \"@id\": \"dtmi:com:example:sensor;1\",\r\n    \"@type\": \"Interface\",\r\n    \"displayName\": \"example sensor interface\",\r\n    \"contents\": [\r\n      {\r\n        \"@type\": \"Property\",\r\n        \"name\": \"name\",\r\n        \"displayName\": \"sensor name\",\r\n        \"schema\": \"string\"\r\n      },\r\n      {\r\n        \"@type\": \"Property\",\r\n        \"name\": \"temp\",\r\n        \"displayName\": \"room temperature\",\r\n        \"schema\": \"integer\"\r\n      }      \r\n    ],\r\n    \"@context\": \"dtmi:dtdl:context;2\"\r\n  },\r\n  {\r\n    \"@id\": \"dtmi:com:example:room;1\",\r\n    \"@type\": \"Interface\",\r\n    \"displayName\": \"example room interface\",\r\n    \"contents\": [\r\n      {\r\n        \"@type\": \"Property\",\r\n        \"name\": \"name\",\r\n        \"displayName\": \"room name\",\r\n        \"schema\": \"string\"\r\n      },\r\n      {\r\n        \"@type\": \"Property\",\r\n        \"name\": \"temp\",\r\n        \"displayName\": \"room temperature\",\r\n        \"schema\": \"integer\"\r\n      },\r\n      {\r\n        \"@type\": \"Property\",\r\n        \"name\": \"comfortIndex\",\r\n        \"displayName\": \"room comfort index\",\r\n        \"schema\": \"integer\"\r\n      },\r\n      {\r\n      \"@type\": \"Relationship\",\r\n      \"@id\": \"dtmi:com:example:room:rel_has_sensors;1\",\r\n      \"name\": \"rel_has_sensors\",\r\n      \"displayName\": \"room has sensors\",\r\n      \"target\": \"dtmi:com:example:sensor;1\"\r\n    }\r\n    ],\r\n    \"@context\": \"dtmi:dtdl:context;2\"\r\n  }\r\n]",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -42,19 +42,44 @@
 					"response": []
 				},
 				{
-					"name": "DigitalTwinModels Delete",
+					"name": "DigitalTwinModels Delete (sensor)",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "https://{{digitaltwins-hostname}}/models/{{model-id}}?api-version=2020-10-31",
+							"raw": "https://{{digitaltwins-hostname}}/models/dtmi:com:example:sensor;1?api-version=2020-10-31",
 							"protocol": "https",
 							"host": [
 								"{{digitaltwins-hostname}}"
 							],
 							"path": [
 								"models",
-								"{{model-id}}"
+								"dtmi:com:example:sensor;1"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "2020-10-31"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DigitalTwinModels Delete (room)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://{{digitaltwins-hostname}}/models/dtmi:com:example:room;1?api-version=2020-10-31",
+							"protocol": "https",
+							"host": [
+								"{{digitaltwins-hostname}}"
+							],
+							"path": [
+								"models",
+								"dtmi:com:example:room;1"
 							],
 							"query": [
 								{
@@ -247,7 +272,7 @@
 			"name": "Data Plane - Twins",
 			"item": [
 				{
-					"name": "DigitalTwins Add",
+					"name": "DigitalTwins Add (sensor)",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
 							"content-type": true
@@ -264,17 +289,57 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "\r\n    {\r\n    \"$metadata\": {\r\n        \"$model\": \"dtmi:com:example:room;1\"\r\n    },\r\n    \"name\" : \"sample room 1\",\r\n    \"temp\" : 62,\r\n    \"comfortIndex\": 100\r\n    }    \r\n"
+							"raw": "\r\n{\r\n \"$metadata\": {\r\n   \"$model\": \"dtmi:com:example:sensor;1\"\r\n  },\r\n  \"name\" : \"example sensor 1\",\r\n  \"temp\" : 62\r\n}    \r\n"
 						},
 						"url": {
-							"raw": "https://{{digitaltwins-hostname}}/digitaltwins/{{twin-id}}?api-version=2020-10-31",
+							"raw": "https://{{digitaltwins-hostname}}/digitaltwins/example-sensor?api-version=2020-10-31",
 							"protocol": "https",
 							"host": [
 								"{{digitaltwins-hostname}}"
 							],
 							"path": [
 								"digitaltwins",
-								"{{twin-id}}"
+								"example-sensor"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "2020-10-31"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DigitalTwins Add (room)",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n    {\r\n    \"$metadata\": {\r\n        \"$model\": \"dtmi:com:example:room;1\"\r\n    },\r\n    \"name\" : \"example room 1\",\r\n    \"temp\" : 62,\r\n    \"comfortIndex\": 100\r\n    }    \r\n"
+						},
+						"url": {
+							"raw": "https://{{digitaltwins-hostname}}/digitaltwins/example-room?api-version=2020-10-31",
+							"protocol": "https",
+							"host": [
+								"{{digitaltwins-hostname}}"
+							],
+							"path": [
+								"digitaltwins",
+								"example-room"
 							],
 							"query": [
 								{
@@ -288,20 +353,35 @@
 				},
 				{
 					"name": "DigitalTwins AddRelationship",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
 					"request": {
 						"method": "PUT",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"$targetId\": \"example-sensor\",\r\n  \"$relationshipName\": \"rel_has_sensors\"\r\n}"
+						},
 						"url": {
-							"raw": "PUT https://{{digitaltwins-hostname}}/digitaltwins/{id}/relationships/{relationshipId}?api-version=2020-10-31",
-							"protocol": "PUT https",
+							"raw": "https://{{digitaltwins-hostname}}/digitaltwins/example-room/relationships/54aed724-a0c6-430f-9b95-17f6ccb3493c?api-version=2020-10-31",
+							"protocol": "https",
 							"host": [
 								"{{digitaltwins-hostname}}"
 							],
 							"path": [
 								"digitaltwins",
-								"{id}",
+								"example-room",
 								"relationships",
-								"{relationshipId}"
+								"54aed724-a0c6-430f-9b95-17f6ccb3493c"
 							],
 							"query": [
 								{
@@ -314,19 +394,44 @@
 					"response": []
 				},
 				{
-					"name": "DigitalTwins Delete",
+					"name": "DigitalTwins Delete (room)",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "https://{{digitaltwins-hostname}}/digitaltwins/{{twin-id}}?api-version=2020-10-31",
+							"raw": "https://{{digitaltwins-hostname}}/digitaltwins/example-room?api-version=2020-10-31",
 							"protocol": "https",
 							"host": [
 								"{{digitaltwins-hostname}}"
 							],
 							"path": [
 								"digitaltwins",
-								"{{twin-id}}"
+								"example-room"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "2020-10-31"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DigitalTwins Delete (sensor)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://{{digitaltwins-hostname}}/digitaltwins/example-sensor?api-version=2020-10-31",
+							"protocol": "https",
+							"host": [
+								"{{digitaltwins-hostname}}"
+							],
+							"path": [
+								"digitaltwins",
+								"example-sensor"
 							],
 							"query": [
 								{
@@ -344,16 +449,16 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "https://{{digitaltwins-hostname}}/digitaltwins/{id}/relationships/{relationshipId}?api-version=2020-10-31",
+							"raw": "https://{{digitaltwins-hostname}}/digitaltwins/example-room/relationships/54aed724-a0c6-430f-9b95-17f6ccb3493c?api-version=2020-10-31",
 							"protocol": "https",
 							"host": [
 								"{{digitaltwins-hostname}}"
 							],
 							"path": [
 								"digitaltwins",
-								"{id}",
+								"example-room",
 								"relationships",
-								"{relationshipId}"
+								"54aed724-a0c6-430f-9b95-17f6ccb3493c"
 							],
 							"query": [
 								{
@@ -371,14 +476,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{digitaltwins-hostname}}/digitaltwins/{{twin-id}}?api-version=2020-10-31",
+							"raw": "https://{{digitaltwins-hostname}}/digitaltwins/example-room?api-version=2020-10-31",
 							"protocol": "https",
 							"host": [
 								"{{digitaltwins-hostname}}"
 							],
 							"path": [
 								"digitaltwins",
-								"{{twin-id}}"
+								"example-room"
 							],
 							"query": [
 								{
@@ -423,16 +528,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{digitaltwins-hostname}}/digitaltwins/{id}/relationships/{relationshipId}?api-version=2020-10-31",
+							"raw": "https://{{digitaltwins-hostname}}/digitaltwins/example-room/relationships/54aed724-a0c6-430f-9b95-17f6ccb3493c?api-version=2020-10-31",
 							"protocol": "https",
 							"host": [
 								"{{digitaltwins-hostname}}"
 							],
 							"path": [
 								"digitaltwins",
-								"{id}",
+								"example-room",
 								"relationships",
-								"{relationshipId}"
+								"54aed724-a0c6-430f-9b95-17f6ccb3493c"
 							],
 							"query": [
 								{
@@ -450,14 +555,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{digitaltwins-hostname}}/digitaltwins/{{twin-id}}/incomingrelationships?api-version=2020-10-31",
+							"raw": "https://{{digitaltwins-hostname}}/digitaltwins/example-sensor/incomingrelationships?api-version=2020-10-31",
 							"protocol": "https",
 							"host": [
 								"{{digitaltwins-hostname}}"
 							],
 							"path": [
 								"digitaltwins",
-								"{{twin-id}}",
+								"example-sensor",
 								"incomingrelationships"
 							],
 							"query": [
@@ -476,14 +581,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{digitaltwins-hostname}}/digitaltwins/{{twin-id}}/relationships?api-version=2020-10-31",
+							"raw": "https://{{digitaltwins-hostname}}/digitaltwins/example-room/relationships?api-version=2020-10-31",
 							"protocol": "https",
 							"host": [
 								"{{digitaltwins-hostname}}"
 							],
 							"path": [
 								"digitaltwins",
-								"{{twin-id}}",
+								"example-room",
 								"relationships"
 							],
 							"query": [
@@ -673,7 +778,7 @@
 		},
 		{
 			"key": "twin-id",
-			"value": "sampleRoom1"
+			"value": "example-room"
 		}
 	]
 }
