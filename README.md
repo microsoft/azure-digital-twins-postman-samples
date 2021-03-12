@@ -1,14 +1,8 @@
-# Project
+# Azure Digital Twins Postman Collection
 
-> This repo has been populated by an initial template to help get you started. Please
-> make sure to update the content to build a great experience for community-building.
+The repo contains a single postman_collection.json file that contains a postman collection of requests to the Azure Digital Twins APIs. Currently the focus of the collection is on on the data plan and includes Models, Query, and Twins.
 
-As the maintainer of this project, please make a few updates:
-
-- Improving this README.MD file to provide a great experience
-- Updating SUPPORT.MD with content about this project's support experience
-- Understanding the security reporting process in SECURITY.MD
-- Remove this section from the README
+We will continue to add updates to the collection on a regular basis untill all Data plane and control plane API requests are created. If you have any suggestions or problems please create an Issue. If you have any question or want to discuss something, please post in the discussion tab.
 
 ## Contributing
 
