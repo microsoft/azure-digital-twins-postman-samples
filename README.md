@@ -4,6 +4,9 @@ The repo contains a single postman_collection.json file that contains a postman 
 
 We will continue to add updates to the collection on a regular basis untill all Data plane and control plane API requests are created. If you have any suggestions or problems please create an Issue. If you have any question or want to discuss something, please post in the discussion tab.
 
+[Full REST API documentation](https://docs.microsoft.com/en-us/rest/api/azure-digitaltwins/)
+[How to use Postman with Azure Digital Twins](https://docs.microsoft.com/en-us/azure/digital-twins/how-to-use-postman)
+
 ## Contributing
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a
