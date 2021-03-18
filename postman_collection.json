@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "0461f5ad-5d9b-485c-ae01-7a0988959e2e",
-		"name": "Azure Digital Twins REST API",
+		"name": "Azure Digital Twins REST API Samples",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "[\r\n  {\r\n    \"@id\": \"dtmi:com:example:sensor;1\",\r\n    \"@type\": \"Interface\",\r\n    \"displayName\": \"example sensor interface\",\r\n    \"contents\": [\r\n      {\r\n        \"@type\": \"Property\",\r\n        \"name\": \"name\",\r\n        \"displayName\": \"sensor name\",\r\n        \"schema\": \"string\"\r\n      },\r\n      {\r\n        \"@type\": \"Property\",\r\n        \"name\": \"temp\",\r\n        \"displayName\": \"room temperature\",\r\n        \"schema\": \"integer\"\r\n      }      \r\n    ],\r\n    \"@context\": \"dtmi:dtdl:context;2\"\r\n  },\r\n  {\r\n    \"@id\": \"dtmi:com:example:room;1\",\r\n    \"@type\": \"Interface\",\r\n    \"displayName\": \"example room interface\",\r\n    \"contents\": [\r\n      {\r\n        \"@type\": \"Property\",\r\n        \"name\": \"name\",\r\n        \"displayName\": \"room name\",\r\n        \"schema\": \"string\"\r\n      },\r\n      {\r\n        \"@type\": \"Property\",\r\n        \"name\": \"temp\",\r\n        \"displayName\": \"room temperature\",\r\n        \"schema\": \"integer\"\r\n      },\r\n      {\r\n        \"@type\": \"Property\",\r\n        \"name\": \"comfortIndex\",\r\n        \"displayName\": \"room comfort index\",\r\n        \"schema\": \"integer\"\r\n      },\r\n      {\r\n      \"@type\": \"Relationship\",\r\n      \"@id\": \"dtmi:com:example:room:rel_has_sensors;1\",\r\n      \"name\": \"rel_has_sensors\",\r\n      \"displayName\": \"room has sensors\",\r\n      \"target\": \"dtmi:com:example:sensor;1\",\r\n      \"properties\": [\r\n        {\r\n            \"@type\": \"Property\",\r\n            \"name\": \"description\",\r\n            \"schema\": \"string\"\r\n        }\r\n    ]\r\n    }\r\n    ],\r\n    \"@context\": \"dtmi:dtdl:context;2\"\r\n  }\r\n]",
+							"raw": "[\r\n   {\r\n    \"@id\": \"dtmi:com:example:sensor;1\",\r\n    \"@type\": \"Interface\",\r\n    \"@context\": \"dtmi:dtdl:context;2\",\r\n    \"displayName\": \"example sensor interface\",    \r\n    \"contents\": [\r\n      {\r\n        \"@type\": \"Property\",\r\n        \"name\": \"name\",\r\n        \"displayName\": \"sensor name\",\r\n        \"schema\": \"string\"\r\n      },\r\n      {\r\n        \"@type\": \"Property\",\r\n        \"name\": \"temp\",\r\n        \"displayName\": \"sensor temperature\",\r\n        \"schema\": \"integer\"\r\n      },\r\n      {\r\n          \"@type\": \"Component\",\r\n          \"name\": \"rules\",\r\n          \"schema\": \"dtmi:com:example:tempRules;1\"\r\n      }        \r\n    ]   \r\n  },\r\n  {\r\n    \"@id\": \"dtmi:com:example:room;1\",\r\n    \"@type\": \"Interface\",\r\n    \"@context\": \"dtmi:dtdl:context;2\",\r\n    \"displayName\": \"example room interface\",    \r\n    \"contents\": [\r\n      {\r\n        \"@type\": \"Property\",\r\n        \"name\": \"name\",\r\n        \"displayName\": \"room name\",\r\n        \"schema\": \"string\"\r\n      },\r\n      {\r\n        \"@type\": \"Property\",\r\n        \"name\": \"temp\",\r\n        \"displayName\": \"room temperature\",\r\n        \"schema\": \"integer\"\r\n      },\r\n      {\r\n        \"@type\": \"Property\",\r\n        \"name\": \"comfortIndex\",\r\n        \"displayName\": \"room comfort index\",\r\n        \"schema\": \"integer\"\r\n      },\r\n      {\r\n      \"@type\": \"Relationship\",\r\n      \"@id\": \"dtmi:com:example:room:rel_has_sensors;1\",\r\n      \"name\": \"rel_has_sensors\",\r\n      \"displayName\": \"room has sensors\",\r\n      \"target\": \"dtmi:com:example:sensor;1\",\r\n      \"properties\": [\r\n         {\r\n           \"@type\": \"Property\",\r\n           \"name\": \"description\",\r\n           \"schema\": \"string\"\r\n         }\r\n       ]\r\n      }\r\n    ]   \r\n  },\r\n  {\r\n    \"@id\": \"dtmi:com:example:tempRules;1\",\r\n    \"@type\": \"Interface\",\r\n    \"@context\": \"dtmi:dtdl:context;2\",  \r\n    \"displayName\": \"example component\",  \r\n    \"name\": \"tempRules\",\r\n    \"contents\": [\r\n      {            \r\n        \"@type\": \"Property\",\r\n        \"name\": \"tempMax\",\r\n        \"displayName\": \"temperature max\",\r\n        \"schema\": \"integer\"      \r\n      }\r\n    ]\r\n  }\r\n]",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -80,6 +80,31 @@
 							"path": [
 								"models",
 								"dtmi:com:example:room;1"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "2020-10-31"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DigitalTwinModels Delete (component)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://{{digitaltwins-hostname}}/models/dtmi:com:example:tempRules;1?api-version=2020-10-31",
+							"protocol": "https",
+							"host": [
+								"{{digitaltwins-hostname}}"
+							],
+							"path": [
+								"models",
+								"dtmi:com:example:tempRules;1"
 							],
 							"query": [
 								{
@@ -289,7 +314,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "\r\n{\r\n \"$metadata\": {\r\n   \"$model\": \"dtmi:com:example:sensor;1\"\r\n  },\r\n  \"name\" : \"example sensor 1\",\r\n  \"temp\" : 62\r\n}    \r\n"
+							"raw": "{\r\n  \"$metadata\": {\r\n    \"$model\": \"dtmi:com:example:sensor;1\"\r\n  },\r\n  \"name\" : \"example sensor 1\",\r\n  \"temp\" : 62,\r\n  \"rules\": { \"tempMax\" : 72 }\r\n}    "
 						},
 						"url": {
 							"raw": "https://{{digitaltwins-hostname}}/digitaltwins/example-sensor?api-version=2020-10-31",
@@ -329,7 +354,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "\r\n    {\r\n    \"$metadata\": {\r\n        \"$model\": \"dtmi:com:example:room;1\"\r\n    },\r\n    \"name\" : \"example room 1\",\r\n    \"temp\" : 62,\r\n    \"comfortIndex\": 100\r\n    }    \r\n"
+							"raw": "{\r\n  \"$metadata\": {\r\n    \"$model\": \"dtmi:com:example:room;1\"\r\n  },\r\n  \"name\" : \"example room 1\",\r\n  \"temp\" : 62,\r\n  \"comfortIndex\": 100\r\n}    "
 						},
 						"url": {
 							"raw": "https://{{digitaltwins-hostname}}/digitaltwins/example-room?api-version=2020-10-31",
@@ -714,18 +739,28 @@
 					"name": "DigitalTwins UpdateComponent",
 					"request": {
 						"method": "PATCH",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json-patch+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
-							"raw": "https://{{digitaltwins-hostname}}/digitaltwins/{id}/components/{componentPath}?api-version=2020-10-31",
+							"raw": "https://{{digitaltwins-hostname}}/digitaltwins/example-sensor/components/rules?api-version=2020-10-31",
 							"protocol": "https",
 							"host": [
 								"{{digitaltwins-hostname}}"
 							],
 							"path": [
 								"digitaltwins",
-								"{id}",
+								"example-sensor",
 								"components",
-								"{componentPath}"
+								"rules"
 							],
 							"query": [
 								{
