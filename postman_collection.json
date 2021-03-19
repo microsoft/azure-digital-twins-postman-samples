@@ -630,18 +630,33 @@
 					"name": "DigitalTwins SendComponentTelemetry",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Message-Id",
+								"value": "f8a6d20e-f62a-4e7e-9251-df3ed8dc60bf",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tempMax\": 65\r\n}"
+						},
 						"url": {
-							"raw": "https://{{digitaltwins-hostname}}/digitaltwins/{id}/components/{componentPath}/telemetry?api-version=2020-10-31",
+							"raw": "https://{{digitaltwins-hostname}}/digitaltwins/example-sensor/components/rules/telemetry?api-version=2020-10-31",
 							"protocol": "https",
 							"host": [
 								"{{digitaltwins-hostname}}"
 							],
 							"path": [
 								"digitaltwins",
-								"{id}",
+								"example-sensor",
 								"components",
-								"{componentPath}",
+								"rules",
 								"telemetry"
 							],
 							"query": [
@@ -748,7 +763,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": ""
+							"raw": "[\r\n {\r\n  \"op\": \"add\",\r\n  \"path\": \"/tempMax\",\r\n  \"value\": 71\r\n }\r\n]"
 						},
 						"url": {
 							"raw": "https://{{digitaltwins-hostname}}/digitaltwins/example-sensor/components/rules?api-version=2020-10-31",
