@@ -314,7 +314,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"$metadata\": {\r\n    \"$model\": \"dtmi:com:example:sensor;1\"\r\n  },\r\n  \"name\" : \"example sensor 1\",\r\n  \"temp\" : 62,\r\n  \"tags\": { \"tags\" : \"tag1, tag2\", \"$metadata\": { } }\r\n}    "
+							"raw": "{\r\n  \"$metadata\": {\r\n    \"$model\": \"dtmi:com:example:sensor;1\"\r\n  },\r\n  \"name\" : \"example sensor 1\"\r\n\r\n}    "
 						},
 						"url": {
 							"raw": "https://{{digitaltwins-hostname}}/digitaltwins/example-sensor?api-version=2020-10-31",
@@ -825,6 +825,120 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Control Plane - Check Name Availability",
+			"item": [
+				{
+					"name": "CheckNameAvailability",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"myadtinstance\",\r\n  \"type\": \"Microsoft.DigitalTwins/digitalTwinsInstances\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.DigitalTwins/locations/eastus2/checkNameAvailability?api-version=2020-12-01",
+							"protocol": "https",
+							"host": [
+								"management",
+								"azure",
+								"com"
+							],
+							"path": [
+								"subscriptions",
+								"{{subscriptionId}}",
+								"providers",
+								"Microsoft.DigitalTwins",
+								"locations",
+								"eastus2",
+								"checkNameAvailability"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "2020-12-01"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Control Plane - Digital Twins Instance",
+			"item": [
+				{
+					"name": "DigitalTwins Get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/resourceGroups/{{resourceGroup}}/providers/Microsoft.DigitalTwins/digitalTwinsInstances/{{digitalTwinInstance}}?api-version=2020-12-01",
+							"protocol": "https",
+							"host": [
+								"management",
+								"azure",
+								"com"
+							],
+							"path": [
+								"subscriptions",
+								"{{subscriptionId}}",
+								"resourceGroups",
+								"{{resourceGroup}}",
+								"providers",
+								"Microsoft.DigitalTwins",
+								"digitalTwinsInstances",
+								"{{digitalTwinInstance}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "2020-12-01"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DigitalTwins List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.DigitalTwins/digitalTwinsInstances?api-version=2020-12-01",
+							"protocol": "https",
+							"host": [
+								"management",
+								"azure",
+								"com"
+							],
+							"path": [
+								"subscriptions",
+								"{{subscriptionId}}",
+								"providers",
+								"Microsoft.DigitalTwins",
+								"digitalTwinsInstances"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "2020-12-01"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"auth": {
@@ -860,7 +974,7 @@
 	"variable": [
 		{
 			"key": "digitaltwins-hostname",
-			"value": ""
+			"value": "<add value, for data plane>"
 		},
 		{
 			"key": "model-id",
@@ -873,6 +987,18 @@
 		{
 			"key": "relationship-id",
 			"value": "54aed724-a0c6-430f-9b95-17f6ccb3493c"
+		},
+		{
+			"key": "subscriptionId",
+			"value": "<add value, for control plane>"
+		},
+		{
+			"key": "resourceGroup",
+			"value": "azure-iot-rg"
+		},
+		{
+			"key": "digitalTwinInstance",
+			"value": "<add value, for control plane>"
 		}
 	]
 }
