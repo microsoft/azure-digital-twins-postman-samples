@@ -6,8 +6,8 @@ We will continue to add updates to the collection on a regular basis until all d
 
 For more information on the APIs used in this collection and instructions for using Postman with Azure Digital Twins, please see the following resources:
 
-* [Azure Digital Twins REST API reference](https://docs.microsoft.com/rest/api/azure-digitaltwins/) *(full REST API documentation)*
-* [How to use Postman to send requests to the Azure Digital Twins APIs](https://docs.microsoft.com/azure/digital-twins/how-to-use-postman) *(step-by-step instructions to set up bearer token, import collections, and run individual requests)*
+* [Azure Digital Twins REST API reference](https://docs.microsoft.com/rest/api/azure-digitaltwins/)
+* [How to use Postman to send requests to the Azure Digital Twins APIs](https://docs.microsoft.com/azure/digital-twins/how-to-use-postman)
 
 ## Contributing
 
