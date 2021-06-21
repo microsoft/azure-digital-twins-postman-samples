@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "0461f5ad-5d9b-485c-ae01-7a0988959e2e",
 		"name": "Azure Digital Twins REST API Samples",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
 	"item": [
 		{
@@ -30,6 +30,40 @@
 							],
 							"path": [
 								"models"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "2020-10-31"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DigitalTwinModels Decommission",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n  {\r\n    \"op\": \"replace\",\r\n    \"path\": \"/decommissioned\",\r\n    \"value\": true\r\n  }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{digitaltwins-hostname}}/models/dtmi:com:example:room;1?api-version=2020-10-31",
+							"protocol": "https",
+							"host": [
+								"{{digitaltwins-hostname}}"
+							],
+							"path": [
+								"models",
+								"dtmi:com:example:room;1"
 							],
 							"query": [
 								{
@@ -751,6 +785,41 @@
 					"response": []
 				},
 				{
+					"name": "DigitalTwins Replace Model Update (room)",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n  {\r\n    \"op\": \"replace\",\r\n    \"path\": \"/$metadata/$model\",\r\n    \"value\": \"dtmi:com:adt:dtsample:room;2\"\r\n  }\r\n]"
+						},
+						"url": {
+							"raw": "https://{{digitaltwins-hostname}}/digitaltwins/example-room?api-version=2020-10-31",
+							"protocol": "https",
+							"host": [
+								"{{digitaltwins-hostname}}"
+							],
+							"path": [
+								"digitaltwins",
+								"example-room"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "2020-10-31"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "DigitalTwins UpdateComponent",
 					"request": {
 						"method": "PATCH",
@@ -943,13 +1012,9 @@
 	],
 	"auth": {
 		"type": "oauth2",
-		"oauth2": [
-			{
-				"key": "addTokenTo",
-				"value": "header",
-				"type": "string"
-			}
-		]
+		"oauth2": {
+			"addTokenTo": "header"
+		}
 	},
 	"event": [
 		{
@@ -998,7 +1063,7 @@
 		},
 		{
 			"key": "digitalTwinInstance",
-			"value": "<add value, for control plane>"
+			"value": "<add digital twin instance name>"
 		}
 	]
 }
