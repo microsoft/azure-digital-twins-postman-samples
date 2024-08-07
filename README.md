@@ -1,10 +1,10 @@
 # Azure Digital Twins Postman Collection
 
+*NOTE: Due to recent security and privacy concerns, Postman is no longer recommended as a REST API testing tool for Azure Digital Twins.*
+
 The repo contains a single postman_collection.json file that contains a postman collection of requests to the Azure Digital Twins APIs. Currently the focus of the collection is on the data plane and includes Models, Query, and Twins.
 
 For more information on the APIs used in this collection, please see [Azure Digital Twins REST API reference](https://docs.microsoft.com/rest/api/azure-digitaltwins/).
-
-*NOTE: Due to recent security and privacy concerns, Postman is no longer recommended as a REST API testing tool for Azure Digital Twins.*
 
 ## Contributing
 
